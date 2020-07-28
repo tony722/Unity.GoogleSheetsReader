@@ -11,10 +11,6 @@ namespace AET.Unity.GoogleSheetsReader {
   public class HtmlReader {
     private string cachedData;
 
-    public enum OnHttpFailure {
-      UseCachedData, Abort
-    }
-
     public HtmlReader(string cacheFilename) {
       CacheFilename = cacheFilename;
       cachedData = ReadCachedData();
@@ -31,7 +27,7 @@ namespace AET.Unity.GoogleSheetsReader {
     }
 
 
-    public string ReadPublishedGoogleSheetCsv(string googleSheetsUrl, OnHttpFailure failmode) {
+    public string ReadPublishedGoogleSheetCsv(string googleSheetsUrl) {
       string newData;
 
       try {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace AET.Unity.GoogleSheetsReader.Core {
+namespace AET.Unity.GoogleSheetsReader {
   public class Cells {
     private List<String> cells;
     private Section parentSection;
