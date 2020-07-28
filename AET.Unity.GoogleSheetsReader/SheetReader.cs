@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AET.Unity.GoogleSheetsReader.Core;
+using AET.Unity.SimplSharp;
 using Crestron.SimplSharp;                          				// For Basic SIMPL# Classes
 
 namespace AET.Unity.GoogleSheetsReader {
   public static class SheetReader {
-    public static string ReadURL(string url) {
-      var client = new Crestron.SimplSharp.Net.Https.HttpsClient();
-      client.PeerVerification = false;
-      var response = client.GetResponse(url);
-      var csvText = response.ContentString;
-      return csvText;
+    public static Sheet ReadCSVText(string csvText) {
+      return ReadCSVText(LineReader.ReadLines(csvText));
     }
 
     public static Sheet ReadCSVText(List<string> lines) {
       var sheet = new Sheet();
       Section section = null;
       foreach(var line in lines.Where(l => ! l.IsEmptyRow())) {
-        var cells = new List<string>(line.Split(','));       
-        if(IsSectionRow(cells)) {
+        var cells = new List<string>(line.Split(','));
+        if (IsSectionRow(cells)) {
           section = sheet.AddSection(cells);
+        } else if (section == null) {
+          ErrorMessage.Error("GoogleSheetsReader tried to read improperly formatted sheet. No section header for data:\n{0}", line);
         } else {
           section.AddRow(cells);
         }

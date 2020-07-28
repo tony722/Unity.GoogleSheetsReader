@@ -4,20 +4,30 @@ using System.Collections.Generic;
 namespace AET.Unity.GoogleSheetsReader.Core {
   public class Row {
     private Section parentSection;
+
     public Row(Section parentSection) {
       this.parentSection = parentSection;
-      Cells = new List<string>();
+      Cells = new Cells(parentSection);
     }
 
-    public Row(Section parentSection, List<string> cells) : this(parentSection) {
-      Cells = cells;
+    public Row(Section parentSection, List<string> cells) {
+      this.parentSection = parentSection;
+      this.Cells = new Cells(parentSection, cells);
     }
 
-    public List<String> Cells { get; set; }
+    public Cells Cells { get; private set; }
 
-    public string Cell(string columnName) {
-      var cellIndex = parentSection.Columns.IndexOf(columnName);
-      return Cells[cellIndex];
+    public string this[string columnName] {
+      get {
+        return Cells[columnName];
+      }
     }
+
+    public string this[int columnIndex] {
+      get {
+        return Cells[columnIndex];
+      }
+    }
+
   }
 }

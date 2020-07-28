@@ -74,9 +74,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader 2017.csproj">
+    <ProjectReference Include="..\AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader 2019.csproj">
       <Project>{336ed991-9ac1-496d-b23c-91ee14f95225}</Project>
-      <Name>AET.Unity.GoogleSheetsReader 2017</Name>
+      <Name>AET.Unity.GoogleSheetsReader 2019</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

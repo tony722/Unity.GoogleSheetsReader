@@ -31,6 +31,7 @@ namespace AET.Unity.GoogleSheetsReader.Tests {
       var section = sheet.Sections[1];
       section.Rows.Count.Should().Be(5);
       section.Rows[4].Cells[2].Should().Be("Data C5");
+      section.Rows[4].Cells["Col C"].Should().Be("Data C5");
     }
   }
 }
