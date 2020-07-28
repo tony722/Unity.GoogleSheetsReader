@@ -15,6 +15,13 @@ namespace AET.Unity.GoogleSheetsReader.Tests {
     }
 
     [TestMethod]
+    public void ReadCSVText_ValidData_CanReadColumnNames() {
+      var testText = TestConfig.ReadLines("Section Name 1,Col 1,Col 2,Col 3");
+      var sheet = SheetReader.ReadCSVText(testText);
+      sheet.Sections[0].Columns[1].Should().Be("Col 2");
+    }
+
+    [TestMethod]
     public void ReadCSVText_ValidRowData_SectionHasRows() {
       var testText = TestConfig.ReadLines("Section Name 1,Col 1,Col 2,Col 3\r\n,Data 1,Data 2,Data 3");
       var sheet = SheetReader.ReadCSVText(testText);

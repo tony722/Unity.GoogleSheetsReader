@@ -8,7 +8,7 @@ namespace AET.Unity.GoogleSheetsReader {
       Rows = new List<Row>();
       
       Name = headerRow.First();
-      Columns = headerRow.Skip(1).Select((s, i) => new {s, i}).ToDictionary(x => x.s, x => x.i);
+      Columns = new Columns(headerRow.Skip(1));
     }    
 
     public void AddRow(List<string> row) {
@@ -17,7 +17,7 @@ namespace AET.Unity.GoogleSheetsReader {
 
     public string Name { get; set; }
     
-    public Dictionary<string, int> Columns { get; private set; }
+    public Columns Columns { get; private set; }
     
     public List<Row> Rows { get; set; }            
   }
