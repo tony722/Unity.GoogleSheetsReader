@@ -1,33 +1,56 @@
-﻿using System;
+﻿using AET.Unity.SimplSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AET.Unity.SimplSharp;
-using Crestron.SimplSharp;                          				// For Basic SIMPL# Classes
+using Crestron.SimplSharp;
 
 namespace AET.Unity.GoogleSheetsReader {
-  public static class SheetReader {
-    public static Sheet ReadCSVText(string csvText) {
-      return ReadCSVText(LineReader.ReadLines(csvText));
+  public class SheetReader {
+    Sheet sheet;
+    Section section;
+
+    public Sheet ReadCsvText(string csvText) {
+      return ReadCsvText(LineReader.ReadLines(csvText));
     }
 
-    public static Sheet ReadCSVText(List<string> lines) {
-      var sheet = new Sheet();
-      Section section = null;
-      foreach(var line in lines.Where(l => ! l.IsEmptyRow())) {
-        var cells = new List<string>(line.Split(','));
-        if (IsSectionRow(cells)) {
-          section = sheet.AddSection(cells);
-        } else if (section == null) {
-          ErrorMessage.Error("GoogleSheetsReader tried to read improperly formatted sheet. No section header for data:\n{0}", line);
-        } else {
-          section.AddRow(cells);
-        }
-      }
+    public Sheet ReadCsvText(List<string> lines) {
+      sheet = new Sheet();
+      section = null;
+      CrestronConsole.Print(".");
+      try {
+        ParseCells(lines);
+      } catch (Exception ex) { ErrorMessage.Warn("Unity.GoogleSheetsReader ParseCells(): {0}", ex.Message); }
       return sheet;
     }
 
-    private static bool IsSectionRow(List<string> cells) {
+    private void ParseCells(List<string> lines) {
+      foreach (var line in lines.Where(l => !l.IsEmptyRow())) {
+        try {
+          ParseCell(line);
+        }
+        catch (Exception ex) {
+          ErrorMessage.Warn("Unity.GoogleSheetsReader ParseCell({0}): {1}", line, ex.Message);
+        }
+
+      }
+    }
+
+    private void ParseCell(string line) {
+      var cells = line.ParseCsv();
+      if (IsSectionRow(cells)) {
+        section = sheet.AddSection(cells);
+      }
+      else if (section == null) {
+        //ignore it
+      }
+      else {
+        section.AddRow(cells);
+      }
+    }
+
+    private static bool IsSectionRow(IList<string> cells) {
+      if (cells == null) return false;
+      if (cells.Count < 1) return false; 
       return (!string.IsNullOrEmpty(cells[0]));
     }
   }

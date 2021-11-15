@@ -13,7 +13,7 @@ namespace AET.Unity.GoogleSheetsReader {
       return Sections.FirstOrDefault(s => s.Name == name);
     }
 
-    public Section AddSection(List<string> row) {
+    public Section AddSection(IList<string> row) {
       var section = new Section(row);
       Sections.Add(section);
       return section;

@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using Crestron.SimplSharp.CrestronIO;
-using AET.Unity.SimplSharp;
-using Crestron.SimplSharp.Net.Https;
+﻿using AET.Unity.SimplSharp;
+using AET.Unity.SimplSharp.FileIO;
+using AET.Unity.SimplSharp.Http;
+using System;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class GoogleReader {
     private string cachedData;
-    private string cacheFilename;
-    private string googleSheetsPublishedCsvUrl;
+    private readonly string cacheFilename;
+    private readonly string googleSheetsPublishedCsvUrl;
+
+    static GoogleReader() {
+      FileIO = new CrestronFileIO();
+      HttpReader = new CrestronHttpReader();
+    }
 
     public GoogleReader(string googleSheetsPublishedCsvUrl, string cacheFilename) {
       this.googleSheetsPublishedCsvUrl = googleSheetsPublishedCsvUrl;
@@ -19,12 +20,11 @@ namespace AET.Unity.GoogleSheetsReader {
       cachedData = ReadCachedData();
     }
 
+    public static IFileIO FileIO;
+    public static IHttpReader HttpReader;
 
-    private string Read() {
-      var client = new HttpsClient();
-      client.PeerVerification = false;
-      var response = client.GetResponse(googleSheetsPublishedCsvUrl);
-      var csvText = response.ContentString;
+    private string ReadHttpsFromGoogle() {
+      var csvText = HttpReader.GetHttpsText(googleSheetsPublishedCsvUrl);
       return csvText;
     }
 
@@ -32,33 +32,30 @@ namespace AET.Unity.GoogleSheetsReader {
     public string ReadPublishedGoogleSheetCsv() {
       string newData;
       try {
-        newData = Read();
+        newData = ReadHttpsFromGoogle();
       } catch (Exception ex) {
-        ErrorMessage.Warn("GoogleSheetsReader: Error retrieving Google Doc, using cache file\n{0}", ex.Message);
         newData = cachedData;
+        ErrorMessage.Warn("Unity.GoogleSheetsReader: Error retrieving Google Doc, using cache file '{1}'\n{0}", ex.Message, cacheFilename);
       }
-      if (newData != cachedData) SaveCachedData(newData);
+      if (newData != cachedData)
+        try {
+          SaveCachedData(newData);
+        } catch (Exception ex) { ErrorMessage.Warn("Unity.GoogleSheetsReader: Error saving cache file '{1}'\n{0}", ex.Message, cacheFilename); }
       return newData;
     }
 
     private string ReadCachedData() {
-      string newData;
       try {
-        var file = File.OpenText(cacheFilename);
-        newData = file.ReadToEnd();
-        file.Close();
+        var newData = FileIO.ReadAllText(cacheFilename);
         return newData;
       } catch {
-        ErrorMessage.Notice("GoogleSheetsReader: Cache file '{0}' does not exist.", cacheFilename);
-        SaveCachedData(string.Empty);
+        ErrorMessage.Notice("Unity.GoogleSheetsReader: Cache file '{0}' does not exist.", cacheFilename);
         return string.Empty;
       }
     }
 
     private void SaveCachedData(string newData) {
-      var file = File.CreateText(cacheFilename);
-      file.Write(newData);
-      file.Close();
+      FileIO.WriteText(cacheFilename, newData);
       cachedData = newData;
     }
   }

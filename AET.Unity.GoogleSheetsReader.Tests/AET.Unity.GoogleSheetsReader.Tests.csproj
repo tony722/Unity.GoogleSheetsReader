@@ -67,6 +67,7 @@
     <Compile Include="SheetReaderTests.cs" />
     <Compile Include="TestConfig.cs" />
     <Compile Include="LineReaderTests.cs" />
+    <Compile Include="CellsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

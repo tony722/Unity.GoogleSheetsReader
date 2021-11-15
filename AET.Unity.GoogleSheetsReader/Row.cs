@@ -2,15 +2,11 @@
 
 namespace AET.Unity.GoogleSheetsReader {
   public class Row {
-    private Section parentSection;
-
     public Row(Section parentSection) {
-      this.parentSection = parentSection;
       Cells = new Cells(parentSection);
     }
 
     public Row(Section parentSection, List<string> cells) {
-      this.parentSection = parentSection;
       this.Cells = new Cells(parentSection, cells);
     }
 

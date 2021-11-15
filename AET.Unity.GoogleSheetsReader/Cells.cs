@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class Cells {
-    private List<String> cells;
-    private Section parentSection;
+    private readonly List<String> cells;
+    private readonly Section parentSection;
 
 
     public Cells(Section parentSection) {
@@ -26,6 +26,10 @@ namespace AET.Unity.GoogleSheetsReader {
         var cellIndex = parentSection.Columns[columnName];
         return cells[cellIndex];
       }
+    }
+
+    public override string ToString() {
+      return String.Join("\t", cells.ToArray());
     }
   }
 }

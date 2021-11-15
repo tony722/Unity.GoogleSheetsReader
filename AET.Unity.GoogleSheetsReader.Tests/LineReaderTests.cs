@@ -19,7 +19,6 @@ namespace AET.Unity.GoogleSheetsReader.Tests {
     [TestMethod]
     public void IsEmptyRow_ContainsData_ReturnsFalse() {
       LineReader.IsEmptyRow("1,2,3,4").Should().BeFalse();
-
     }
   }
 }
