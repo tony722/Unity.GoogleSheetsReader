@@ -1,6 +1,7 @@
 # AET.Unity.GoogleSheetsReader
 
 ### Provides a Crestron Simpl# library for reading a Google Sheets worksheet that has been published as a csv. 
+It also automatically saves the sheet to a cache file locally so the processor can work offline.
 
 [Download latest Crestron .clz here: v1.0.1](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.1/AET.Unity.GoogleSheetsReader.clz)
 
@@ -28,8 +29,11 @@ A | B | C | D
 Simple example:
 ````C#
 string googleSheetsUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKY0ZBdIi3xGXwtzHt57Z4rsUNvYL-CQg34sVGct5C5h0VAQvHfYYn-YEUSLnaJ1PKk84Ksp7XK2UF/pub?gid=0&single=true&output=csv";
-string csvText = SheetReader.ReadURL(googleSheetsUrl);
-Sheet sheet = SheetReader.ReadCSVText(csvText);
+string cacheFile = "\\User\\SampleSheet.csv";
+var reader = new GoogleReader(googleSheetsUrl, cacheFile);
+string csvText = reader.ReadPublishedGoogleSheetCsv();
+
+Sheet sheet = new SheetReader().ReadCSVText(csvText);
 
 Section section1 = sheet.Sections[0];
 Section section2 = sheet.Sections["My 2nd Section"];
