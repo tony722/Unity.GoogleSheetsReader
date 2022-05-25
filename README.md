@@ -28,16 +28,16 @@ A | B | C | D
 Simple example:
 ````C#
 string googleSheetsUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKY0ZBdIi3xGXwtzHt57Z4rsUNvYL-CQg34sVGct5C5h0VAQvHfYYn-YEUSLnaJ1PKk84Ksp7XK2UF/pub?gid=0&single=true&output=csv";
-string csvData = SheetReader.ReadURL(googleSheetsUrl);
+string csvText = SheetReader.ReadURL(googleSheetsUrl);
 Sheet sheet = SheetReader.ReadCSVText(csvText);
 
 Section section1 = sheet.Sections[0];
 Section section2 = sheet.Sections["My 2nd Section"];
 
-foreach (var row in section1.Rows) {
-  string name = row[0]; //name = "Item 1". Note: column A is not accessible here: it's reserved exclusively for section names. So [0] is column B.
-  string date = row["Date"]; //Can also access by column name
-  string value = row["Value"];
+foreach (var cells in section1.Rows) {
+  string name = cells[0]; //name = "Item 1". Note: column A is not accessible here: it's reserved exclusively for section names. So [0] is column B.
+  string date = cells["Date"]; //Can also access by column name
+  string value = cells["Value"];
 }
 
 var description = section2.Rows[0].Cells["Description"];
