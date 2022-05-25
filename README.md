@@ -7,12 +7,12 @@ It also automatically saves the sheet to a cache file locally so the processor c
 
 To publish a Google Sheet as a csv:
 1. In Google Sheets go to File->Share->Publish to the Web. 
-2. Under "Link" select the sheet(s) you want to publish.
+2. Under "Link" select the sheet you want to publish.
 3. Under "Embed" select Comma-separated values (.csv) 
 4. Hit Publish
 5. Copy the provided URL and use that in your code.
 
-_**Note: column A in your Google Sheet is reserved exclusively for the section name(s)**. Do not put other values in Column A--even if you only need a single section._
+_**Note: column A in your Google Sheet is reserved exclusively for the section name(s)**. Do not put other values in Column A--and even if you only need a single section, give it a name._
 
 [See example google sheet here](https://docs.google.com/spreadsheets/d/1WCXD3m8lKbrhlAkJa6cHlWXUSzqFqCSpCL9sSZEk4Uo/edit?usp=sharing). This example sheet has two sections.
 
@@ -42,6 +42,8 @@ foreach (var cells in section1.Rows) {
   string name = cells[0]; //name = "Item 1". Note: column A is not accessible here: it's reserved exclusively for section names. So [0] is column B.
   string date = cells["Date"]; //Can also access by column name
   string value = cells["Value"];
+  
+  //do something with these values now
 }
 
 var description = section2.Rows[0].Cells["Description"];
