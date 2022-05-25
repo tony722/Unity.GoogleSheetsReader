@@ -1,8 +1,11 @@
 # AET.Unity.GoogleSheetsReader
 
-Provides a Crestron Simpl# library for reading a Google Sheets worksheet that has been published as a csv. 
+### Provides a Crestron Simpl# library for reading a Google Sheets worksheet that has been published as a csv. 
 
-1. To publish as a csv, in Google Sheets go to File->Share->Publish to the Web. 
+[Download latest Crestron .clz here: v1.0.1](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.1/AET.Unity.GoogleSheetsReader.clz)
+
+To publish a Google Sheet as a csv:
+1. In Google Sheets go to File->Share->Publish to the Web. 
 2. Under "Link" select the sheet(s) you want to publish.
 3. Under "Embed" select Comma-separated values (.csv) 
 4. Hit Publish
