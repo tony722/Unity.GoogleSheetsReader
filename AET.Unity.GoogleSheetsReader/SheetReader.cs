@@ -6,8 +6,8 @@ using Crestron.SimplSharp;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class SheetReader {
-    Sheet sheet;
-    Section section;
+    private Sheet sheet;
+    private Section section;
 
     public Sheet ReadCsvText(string csvText) {
       return ReadCsvText(LineReader.ReadLines(csvText));
@@ -38,7 +38,7 @@ namespace AET.Unity.GoogleSheetsReader {
     private void ParseCell(string line) {
       var cells = line.ParseCsv();
       if (IsSectionRow(cells)) {
-        section = sheet.AddSection(cells);
+        section = sheet.Sections.Add(cells);
       }
       else if (section == null) {
         //ignore it

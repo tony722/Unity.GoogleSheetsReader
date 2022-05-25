@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AET.Unity.GoogleSheetsReader {
@@ -7,8 +8,8 @@ namespace AET.Unity.GoogleSheetsReader {
     private readonly Dictionary<string, int> columnsIndexes;
 
     public Columns(IList<string> columns) {
-      this.columns = columns.ToList();
-      columnsIndexes = columns.Select((s, i) => new { s, i }).ToDictionary(x => x.s, x => x.i);
+      this.columns = columns.ToList();      
+      columnsIndexes = columns.Select((s, i) => new { s, i }).ToDictionary(x => x.s, x => x.i, StringComparer.OrdinalIgnoreCase);
     }
 
     public string this[int index] {

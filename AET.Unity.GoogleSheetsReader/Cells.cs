@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class Cells {
-    private readonly List<String> cells;
+    private readonly List<string> cells;
     private readonly Section parentSection;
 
 
     public Cells(Section parentSection) {
-      this.cells = new List<string>();
+      cells = new List<string>();
       this.parentSection = parentSection;
 
     }
@@ -29,7 +29,7 @@ namespace AET.Unity.GoogleSheetsReader {
     }
 
     public override string ToString() {
-      return String.Join("\t", cells.ToArray());
+      return string.Join("\t", cells.ToArray());
     }
   }
 }
