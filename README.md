@@ -3,7 +3,7 @@
 ### Provides a Crestron Simpl# library for reading a Google Sheets worksheet that has been published as a csv. 
 It also automatically saves the sheet to a cache file locally so the processor can work offline.
 
-[Download latest Demo .zip Crestron here: v1.0.2](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.2/AET.Unity.GoogleSheetsReader.zip)
+[Download latest Demo .zip Crestron here: v1.0.2](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.2/GoogleSheetsReader.Demo_compiled.zip)
 
 To publish a Google Sheet as a csv:
 1. In Google Sheets go to File->Share->Publish to the Web. 
