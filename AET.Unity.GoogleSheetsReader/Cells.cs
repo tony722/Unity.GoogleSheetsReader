@@ -31,5 +31,9 @@ namespace AET.Unity.GoogleSheetsReader {
     public override string ToString() {
       return string.Join("\t", cells.ToArray());
     }
+
+    public string[] ToArray() {
+      return cells.ToArray();
+    }
   }
 }

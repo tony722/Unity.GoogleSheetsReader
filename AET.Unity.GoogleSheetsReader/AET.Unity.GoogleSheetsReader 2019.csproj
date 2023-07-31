@@ -56,6 +56,7 @@
     <Compile Include="GoogleReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SheetReader.cs" />
+    <Compile Include="SplusSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AET.Unity.SimplSharp\AET.Unity.SimplSharp\AET.Unity.SimplSharp VS2019.csproj">

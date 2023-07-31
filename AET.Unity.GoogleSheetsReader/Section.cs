@@ -9,7 +9,7 @@ namespace AET.Unity.GoogleSheetsReader {
       
       Name = headerRow.First();
       Columns = new Columns(headerRow.Skip(1).ToList());
-    }    
+    }
 
     public void AddRow(IList<string> row) {
       Rows.Add(new Row(this, row.Skip(1).ToList()));

@@ -19,5 +19,7 @@ namespace AET.Unity.GoogleSheetsReader {
     public int this[string columnName] {
       get { return columnsIndexes[columnName]; }
     }
+
+    public int Count { get { return columns.Count; } }
   }
 }

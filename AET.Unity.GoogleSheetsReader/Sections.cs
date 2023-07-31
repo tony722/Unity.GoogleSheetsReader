@@ -1,9 +1,10 @@
 ﻿using AET.Unity.SimplSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace AET.Unity.GoogleSheetsReader {
-  public class Sections {
+  public class Sections : IEnumerable<Section> {
     private readonly IndexedDictionary<string, Section> sections = new IndexedDictionary<string, Section>(StringComparer.OrdinalIgnoreCase);
 
     public Section this[string name] { get { return sections[name]; } }
@@ -28,5 +29,21 @@ namespace AET.Unity.GoogleSheetsReader {
     public bool TryGet(string name, out Section section) {
       return sections.TryGetValue(name, out section);
     }
+
+
+    #region IEnumerable<Section> Members
+
+    IEnumerator<Section> IEnumerable<Section>.GetEnumerator() {
+      return sections.Values.GetEnumerator();
+    }
+    #endregion
+
+    #region IEnumerable Members
+
+    IEnumerator IEnumerable.GetEnumerator() {
+      return sections.Values.GetEnumerator();
+    }
+
+    #endregion
   }
 }

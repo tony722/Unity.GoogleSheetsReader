@@ -1,6 +1,6 @@
 ﻿using AET.Unity.SimplSharp;
 using AET.Unity.SimplSharp.FileIO;
-using AET.Unity.SimplSharp.Http;
+using AET.Unity.SimplSharp.HttpClient;
 using System;
 
 namespace AET.Unity.GoogleSheetsReader {
@@ -11,7 +11,7 @@ namespace AET.Unity.GoogleSheetsReader {
 
     static GoogleReader() {
       FileIO = new CrestronFileIO();
-      HttpReader = new CrestronHttpReader();
+      HttpClient = new CrestronHttpsClient(1);
     }
 
     public GoogleReader(string googleSheetsPublishedCsvUrl, string cacheFilename) {
@@ -21,10 +21,10 @@ namespace AET.Unity.GoogleSheetsReader {
     }
 
     public static IFileIO FileIO;
-    public static IHttpReader HttpReader;
+    public static IHttpClient HttpClient;
 
     private string ReadHttpsFromGoogle() {
-      var csvText = HttpReader.GetHttpsText(googleSheetsPublishedCsvUrl);
+      var csvText = HttpClient.Get(googleSheetsPublishedCsvUrl);
       return csvText;
     }
 

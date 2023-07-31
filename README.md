@@ -3,7 +3,7 @@
 ### Provides a Crestron Simpl# library for reading a Google Sheets worksheet that has been published as a csv. 
 It also automatically saves the sheet to a cache file locally so the processor can work offline.
 
-[Download latest Crestron .clz here: v1.0.1](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.1/AET.Unity.GoogleSheetsReader.clz)
+[Download latest Demo .zip Crestron here: v1.0.2](https://github.com/tony722/Unity.GoogleSheetsReader/releases/download/v1.0.2/AET.Unity.GoogleSheetsReader.zip)
 
 To publish a Google Sheet as a csv:
 1. In Google Sheets go to File->Share->Publish to the Web. 
@@ -26,14 +26,15 @@ A | B | C | D
  &#65279; | Item Type B | 50 | 14.95
 
 
-Simple example:
+See the SIMPL+ example in the Demo .zip file, or use this library as followings in Simpl#Pro (simple example):
+
 ````C#
 string googleSheetsUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKY0ZBdIi3xGXwtzHt57Z4rsUNvYL-CQg34sVGct5C5h0VAQvHfYYn-YEUSLnaJ1PKk84Ksp7XK2UF/pub?gid=0&single=true&output=csv";
 string cacheFile = "\\User\\SampleSheet.csv";
 var reader = new GoogleReader(googleSheetsUrl, cacheFile);
 string csvText = reader.ReadPublishedGoogleSheetCsv();
 
-Sheet sheet = new SheetReader().ReadCSVText(csvText);
+Sheet sheet = new SheetReader().ReadCsvText(csvText);
 
 Section section1 = sheet.Sections[0];
 Section section2 = sheet.Sections["My 2nd Section"];

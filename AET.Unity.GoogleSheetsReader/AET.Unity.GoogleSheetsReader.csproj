@@ -70,6 +70,7 @@
     <Compile Include="Sections.cs" />
     <Compile Include="Sheet.cs" />
     <Compile Include="SheetReader.cs" />
+    <Compile Include="SplusSheetReader.cs" />
     <None Include="Properties\ControlSystem.cfg" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem  S# preparation will execute after these operations</PostBuildEvent>
+    <PostBuildEvent>rem  S# preparation will execute after these operations
+PowerShell -ExecutionPolicy bypass -File Z:\Library\AET\SIMPL#\PostBuildCopy.ps1 "$(TargetDir)|$(SolutionDir)SIMPL Windows\"</PostBuildEvent>
+    <PreBuildEvent>del "$(TargetDir)*.clz"</PreBuildEvent>
   </PropertyGroup>
 </Project>
