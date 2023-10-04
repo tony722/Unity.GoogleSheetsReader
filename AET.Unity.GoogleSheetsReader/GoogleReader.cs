@@ -25,7 +25,7 @@ namespace AET.Unity.GoogleSheetsReader {
 
     private string ReadHttpsFromGoogle() {
       var csvText = HttpClient.Get(googleSheetsPublishedCsvUrl);
-      return csvText;
+      return csvText.Content;
     }
 
 
@@ -37,7 +37,10 @@ namespace AET.Unity.GoogleSheetsReader {
         newData = cachedData;
         ErrorMessage.Warn("Unity.GoogleSheetsReader: Error retrieving Google Doc, using cache file '{1}'\n{0}", ex.Message, cacheFilename);
       }
-      if (newData != cachedData)
+      if (newData.IsNullOrWhiteSpace()) {
+        newData = cachedData;
+        ErrorMessage.Warn("Unity.GoogleSheetsReader: Error retrieving Google Doc--retrieved empty document, using cache file '{0}'\n", cacheFilename);
+      } else if (newData != cachedData)
         try {
           SaveCachedData(newData);
         } catch (Exception ex) { ErrorMessage.Warn("Unity.GoogleSheetsReader: Error saving cache file '{1}'\n{0}", ex.Message, cacheFilename); }
