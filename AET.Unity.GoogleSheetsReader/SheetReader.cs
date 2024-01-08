@@ -10,22 +10,26 @@ namespace AET.Unity.GoogleSheetsReader {
     private Section section;
 
     public Sheet ReadCsvText(string csvText) {
-      return ReadCsvText(LineReader.ReadLines(csvText));
+      ConsoleMessage.Print("Parsing CSV");
+      var lines = CsvFileParser.Parse(csvText);
+      sheet = ReadCsvText(lines);
+      ConsoleMessage.PrintLine("Done.");
+      return sheet;
     }
 
-    public Sheet ReadCsvText(List<string> lines) {
+    public Sheet ReadCsvText(List<List<string>> lines) {
       sheet = new Sheet();
       section = null;
-      CrestronConsole.Print(".");
       try {
         ParseCells(lines);
       } catch (Exception ex) { ErrorMessage.Warn("Unity.GoogleSheetsReader ParseCells(): {0}", ex.Message); }
       return sheet;
     }
 
-    private void ParseCells(List<string> lines) {
-      foreach (var line in lines.Where(l => !l.IsEmptyRow())) {
+    private void ParseCells(List<List<string>> lines) {
+      foreach (var line in lines.Where(l => !IsEmptyRow(l))) {
         try {
+          ConsoleMessage.Print(".");
           ParseCell(line);
         }
         catch (Exception ex) {
@@ -35,8 +39,9 @@ namespace AET.Unity.GoogleSheetsReader {
       }
     }
 
-    private void ParseCell(string line) {
-      var cells = line.ParseCsv();
+    private bool IsEmptyRow(IList<string> line) { return line.All(c => c.IsNullOrWhiteSpace());}
+
+    private void ParseCell(IList<string> cells) {
       if (IsSectionRow(cells)) {
         section = sheet.Sections.Add(cells);
       }

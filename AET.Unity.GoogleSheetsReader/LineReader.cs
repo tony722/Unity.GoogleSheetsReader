@@ -17,5 +17,7 @@ namespace AET.Unity.GoogleSheetsReader {
       if (System.Text.RegularExpressions.Regex.IsMatch(text, "^,*$")) return true;
       return false;
     }
+
+    
   }
 }

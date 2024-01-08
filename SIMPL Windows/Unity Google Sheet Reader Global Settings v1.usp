@@ -1,6 +1,5 @@
 // #DEFINE_CONSTANT MAX_ZONES 16
-
-//#ENABLE_TRACE
+// #ENABLE_TRACE
 
 /*******************************************************************************************
   Compiler Directives
@@ -15,7 +14,7 @@
 
 Copyright (C) 2023 Anthony Evert 
 Programmer: 		Tony Evert / tony722@gmail.com
-Version:   			1.0.1
+Version:   			1.0
 
 #HELP_END
 
@@ -27,19 +26,18 @@ Version:   			1.0.1
 /*******************************************************************************************
   Inputs
 *******************************************************************************************/
-DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_;
-DIGITAL_INPUT Init;
 
 /*******************************************************************************************
   Outputs
 *******************************************************************************************/
-DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_;
-DIGITAL_OUTPUT Zone_Visible[25];
-STRING_OUTPUT Zone_Name[25];
 
 
+INTEGER_PARAMETER Use_Lambda;
+#BEGIN_PARAMETER_PROPERTIES Use_Lambda
+   propList = { 0d , "No" } , { 1d , "Yes" };
+#END_PARAMETER_PROPERTIES
 
-STRING_PARAMETER GoogleWorkbookId[255], GoogleSheetName[255], CacheFilename[255], SectionName[255];
+STRING_PARAMETER Lambda_Url[255];
 /*******************************************************************************************
   Global Variables
 *******************************************************************************************/
@@ -48,25 +46,17 @@ SplusSheetReader reader;
 /*******************************************************************************************
   Functions
 *******************************************************************************************/
-function ReadZones() {
-  integer rw, zoneNumber;
-  for(rw = 1 to reader.RowCount) {
-    zoneNumber = atoi(reader.Cell(rw, "Number"));
-    Zone_Name[zoneNumber] = reader.Cell(rw, "Name");
-    Zone_Visible[zoneNumber] = atoi(reader.Cell(rw, "Visible"));
-  }
-}
+
 /*******************************************************************************************
   Events
 *******************************************************************************************/
-THREADSAFE PUSH Init { 
-  reader.ReadSection(GoogleWorkbookId, GoogleSheetName, CacheFilename, SectionName); 
-  ReadZones();
-}
-	
 
 /*******************************************************************************************
   Main()
 *******************************************************************************************/
 
-//Function Main() { }
+Function Main() { 
+  WaitForInitializationComplete();
+  SplusGlobalSettings.SetUseLambda(Use_Lambda);
+  SplusGlobalSettings.SetLambdaUrl(Lambda_Url);
+}

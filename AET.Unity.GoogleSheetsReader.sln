@@ -1,31 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReader", "AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader.csproj", "{36AE13A5-5850-4FCD-8FF0-CD91B87FDC9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReader", "AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader.csproj", "{3431C086-C827-4DFE-8375-16B73DBC2DE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp", "..\AET.Unity.SimplSharp\AET.Unity.SimplSharp\AET.Unity.SimplSharp.csproj", "{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp", "..\AET.Unity.SimplSharp\AET.Unity.SimplSharp\AET.Unity.SimplSharp.csproj", "{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Referenced Projects", "Referenced Projects", "{CB837115-C106-4202-85C0-1EF72A1DAA73}"
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AET.Matson2.CardReader.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36AE13A5-5850-4FCD-8FF0-CD91B87FDC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36AE13A5-5850-4FCD-8FF0-CD91B87FDC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36AE13A5-5850-4FCD-8FF0-CD91B87FDC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36AE13A5-5850-4FCD-8FF0-CD91B87FDC9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3431C086-C827-4DFE-8375-16B73DBC2DE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3431C086-C827-4DFE-8375-16B73DBC2DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3431C086-C827-4DFE-8375-16B73DBC2DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3431C086-C827-4DFE-8375-16B73DBC2DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C68FE0EF-00E6-4C7D-BC71-E5B27ADE9DC4} = {CB837115-C106-4202-85C0-1EF72A1DAA73}
+		{4AC1536E-93AB-4A69-AE65-A9B85B8E50FF} = {CB837115-C106-4202-85C0-1EF72A1DAA73}
 	EndGlobalSection
 EndGlobal

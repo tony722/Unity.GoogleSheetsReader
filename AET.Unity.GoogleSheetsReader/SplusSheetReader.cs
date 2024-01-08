@@ -6,12 +6,12 @@ using AET.Unity.SimplSharp;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class SplusSheetReader {
-    public Section section;   
+    public Section section;      
     
-    public void ReadSection(string googleSheetsPublishedCsvUrl, string cacheFilename, string sectionName) {  
-      var reader = new GoogleReader(googleSheetsPublishedCsvUrl, cacheFilename);
-      string csvText = reader.ReadPublishedGoogleSheetCsv();
-
+    public void ReadSection(string googleWorkbookId, string googleSheetId, string cacheFilename, string sectionName) {
+      var reader = new GoogleReader(googleWorkbookId, googleSheetId, cacheFilename);
+      var csvText = reader.ReadPublishedGoogleSheetCsv();
+      
       var sheet = new SheetReader().ReadCsvText(csvText);
       section = sheet.Sections[sectionName];
     }    

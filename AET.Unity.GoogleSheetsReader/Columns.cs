@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AET.Unity.SimplSharp;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class Columns {
@@ -9,7 +10,7 @@ namespace AET.Unity.GoogleSheetsReader {
 
     public Columns(IList<string> columns) {
       this.columns = columns.ToList();      
-      columnsIndexes = columns.Select((s, i) => new { s, i }).ToDictionary(x => x.s, x => x.i, StringComparer.OrdinalIgnoreCase);
+      columnsIndexes = columns.Select((s, i) => new { s, i }).SafeToDictionary(x => x.s, x => x.i, StringComparer.OrdinalIgnoreCase);
     }
 
     public string this[int index] {
