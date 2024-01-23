@@ -2,22 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Crestron.SimplSharp;
+using Newtonsoft.Json;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class SheetReader {
     private Sheet sheet;
     private Section section;
 
-    public Sheet ReadCsvText(string csvText) {
-      ConsoleMessage.Print("Parsing CSV");
-      var lines = CsvFileParser.Parse(csvText);
-      sheet = ReadCsvText(lines);
+    public Sheet ReadJsonText(string jsonText) {
+      ConsoleMessage.Print("Parsing Json");
+      var json = JsonConvert.DeserializeObject<GoogleSheetJson>(jsonText);
+      sheet = ReadLines(json.Values);
       ConsoleMessage.PrintLine("Done.");
       return sheet;
     }
 
-    public Sheet ReadCsvText(List<List<string>> lines) {
+    public Sheet ReadLines(List<List<string>> lines) {
       sheet = new Sheet();
       section = null;
       try {
@@ -26,6 +26,25 @@ namespace AET.Unity.GoogleSheetsReader {
       return sheet;
     }
 
+
+    public Section ReadJsonTextWithoutSections(string jsonText) {
+      ConsoleMessage.Print("Parsing Json");
+      var json = JsonConvert.DeserializeObject<GoogleSheetJson>(jsonText);
+      section = ReadLinesWithoutSections(json.Values);
+      ConsoleMessage.PrintLine("Done.");
+      return section;
+    }
+
+    private Section ReadLinesWithoutSections(List<List<string>> lines) {
+      try {
+        section = new Section(lines[0], true);
+        foreach (var line in lines.Skip(1)) {
+          section.AddEntireRow(line);
+        }
+      } catch (Exception ex) { ErrorMessage.Warn("Unity.GoogleSheetsReader ReadLinesWithoutSections(): {0}", ex.Message); }
+      return section;
+    }
+    
     private void ParseCells(List<List<string>> lines) {
       foreach (var line in lines.Where(l => !IsEmptyRow(l))) {
         try {

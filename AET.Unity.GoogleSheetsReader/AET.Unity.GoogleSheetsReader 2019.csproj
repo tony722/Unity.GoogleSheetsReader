@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.Compact, Version=4.0.8.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\ProgramData\Crestron\SDK\Newtonsoft.Json.Compact.dll</HintPath>
+    </Reference>
     <Reference Include="SimplSharpCustomAttributesInterface">
       <HintPath>C:\ProgramData\Crestron\SDK\SimplSharpCustomAttributesInterface.dll</HintPath>
     </Reference>
@@ -48,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Cells.cs" />
     <Compile Include="Columns.cs" />
+    <Compile Include="GoogleSheetJson.cs" />
     <Compile Include="LineReader.cs" />
     <Compile Include="Row.cs" />
     <Compile Include="Section.cs" />

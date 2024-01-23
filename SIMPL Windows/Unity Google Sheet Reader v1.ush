@@ -12,7 +12,7 @@
 [BEGIN]
   ObjTp=Hd
   Cmn1=Copyright (C) 2023 Anthony Evert \\Programmer: 		Tony Evert / tony722@gmail.
-  Cmn2=com\\Version:   			1.0.1\\
+  Cmn2=com\\Version:   			1.0.2\\
 [END]
 [BEGIN]
   ObjTp=Symbol
@@ -32,8 +32,10 @@
   InputSigType3=Digital
   InputCue4=[~UNUSED~]
   InputSigType4=Digital
-  InputCue5=Init
+  InputCue5=[~UNUSED~]
   InputSigType5=Digital
+  InputCue6=Init
+  InputSigType6=Digital
   OutputCue1=[~UNUSED~]
   OutputSigType1=Digital
   OutputCue2=[~UNUSED~]
@@ -42,8 +44,10 @@
   OutputSigType3=Digital
   OutputCue4=[~UNUSED~]
   OutputSigType4=Digital
-  OutputCue5=Zone_Visible[#]
+  OutputCue5=[~UNUSED~]
   OutputSigType5=Digital
+  OutputCue6=Zone_Visible[#]
+  OutputSigType6=Digital
   OutputList2Cue1=Zone_Name[#]
   OutputList2SigType1=Serial
   ParamCue1=[Reference Name]
@@ -51,20 +55,22 @@
   ParamSigType2=String
   ParamCue3=GoogleSheetName
   ParamSigType3=String
-  ParamCue4=CacheFilename
+  ParamCue4=GoogleAPIKey
   ParamSigType4=String
-  ParamCue5=SectionName
+  ParamCue5=CacheFilenameBase
   ParamSigType5=String
-  MinVariableInputs=5
-  MaxVariableInputs=5
+  ParamCue6=SectionName
+  ParamSigType6=String
+  MinVariableInputs=6
+  MaxVariableInputs=6
   MinVariableInputsList2=0
   MaxVariableInputsList2=0
-  MinVariableOutputs=5
-  MaxVariableOutputs=29
+  MinVariableOutputs=6
+  MaxVariableOutputs=30
   MinVariableOutputsList2=1
   MaxVariableOutputsList2=25
-  MinVariableParams=4
-  MaxVariableParams=4
+  MinVariableParams=5
+  MaxVariableParams=5
   Expand=expand_separately
   Expand2=expand_separately
   ProgramTree=Logic
@@ -83,7 +89,8 @@
   Pp3=3
   Pp4=4
   Pp5=5
-  MPp=5
+  Pp6=6
+  MPp=6
   NVStorage=10
   ParamSigType1=String
   SmplCInputCue1=o#
@@ -129,6 +136,14 @@
 [BEGIN]
   ObjTp=Dp
   H=5
+  Tp=1
+  HD=False
+  NoS=False
+  VVS=0
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=6
   Tp=1
   HD=False
   NoS=False

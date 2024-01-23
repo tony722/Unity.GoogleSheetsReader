@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AET.Unity.SimplSharp;
+﻿using AET.Unity.SimplSharp;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class SplusSheetReader {
     public Section section;      
+    public string CacheFilenameBase { get; set; }
+    public string GoogleWorkbookId { get; set; }
+
+    public string GoogleApiKey { get; set; }
     
-    public void ReadSection(string googleWorkbookId, string googleSheetId, string cacheFilename, string sectionName) {
-      var reader = new GoogleReader(googleWorkbookId, googleSheetId, cacheFilename);
-      var csvText = reader.ReadPublishedGoogleSheetCsv();
+    public void ReadSection(string sheetName, string sectionName) {
+      var reader = new GoogleReader { CacheFilenameBase = CacheFilenameBase, GoogleWorkbookId = GoogleWorkbookId, GoogleApiKey = GoogleApiKey };
+      var jsonText = reader.ReadPublishedGoogleSheetJson(sheetName);
       
-      var sheet = new SheetReader().ReadCsvText(csvText);
+      var sheet = new SheetReader().ReadJsonText(jsonText);
       section = sheet.Sections[sectionName];
     }    
 

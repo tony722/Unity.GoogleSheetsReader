@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class Row {
@@ -7,7 +8,9 @@ namespace AET.Unity.GoogleSheetsReader {
     }
 
     public Row(Section parentSection, List<string> cells) {
-      this.Cells = new Cells(parentSection, cells);
+      var missingCellsCount = parentSection.Columns.Count - cells.Count;
+      if(missingCellsCount > 0) cells.AddRange(Enumerable.Repeat(string.Empty, missingCellsCount));
+      Cells = new Cells(parentSection, cells);
     }
 
     public Cells Cells { get; private set; }
@@ -23,6 +26,5 @@ namespace AET.Unity.GoogleSheetsReader {
         return Cells[columnIndex];
       }
     }
-
   }
 }

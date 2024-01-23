@@ -18,7 +18,14 @@ namespace AET.Unity.GoogleSheetsReader {
     }
 
     public int this[string columnName] {
-      get { return columnsIndexes[columnName]; }
+      get {
+        try {
+          return columnsIndexes[columnName];
+        } catch (Exception ex) {
+          if (ex is KeyNotFoundException) throw new KeyNotFoundException(string.Format("Unity.GoogleSheetsReader Tried to retrieve column that doesn't exist: '{0}'", columnName));
+          throw;
+        }
+      }
     }
 
     public int Count { get { return columns.Count; } }

@@ -15,7 +15,7 @@
 
 Copyright (C) 2023 Anthony Evert 
 Programmer: 		Tony Evert / tony722@gmail.com
-Version:   			1.0.1
+Version:   			1.0.2
 
 #HELP_END
 
@@ -27,19 +27,19 @@ Version:   			1.0.1
 /*******************************************************************************************
   Inputs
 *******************************************************************************************/
-DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_;
+DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_,_skip_;
 DIGITAL_INPUT Init;
 
 /*******************************************************************************************
   Outputs
 *******************************************************************************************/
-DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_;
+DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_;
 DIGITAL_OUTPUT Zone_Visible[25];
 STRING_OUTPUT Zone_Name[25];
 
 
 
-STRING_PARAMETER GoogleWorkbookId[255], GoogleSheetName[255], CacheFilename[255], SectionName[255];
+STRING_PARAMETER GoogleWorkbookId[255], GoogleSheetName[255], GoogleAPIKey[255], CacheFilenameBase[255], SectionName[255];
 /*******************************************************************************************
   Global Variables
 *******************************************************************************************/
@@ -56,11 +56,15 @@ function ReadZones() {
     Zone_Visible[zoneNumber] = atoi(reader.Cell(rw, "Visible"));
   }
 }
+
 /*******************************************************************************************
   Events
 *******************************************************************************************/
-THREADSAFE PUSH Init { 
-  reader.ReadSection(GoogleWorkbookId, GoogleSheetName, CacheFilename, SectionName); 
+THREADSAFE PUSH Init {  
+  reader.CacheFilenameBase = CacheFilenameBase;
+  reader.GoogleWorkbookId = GoogleWorkbookId;
+  reader.GoogleApiKey = GoogleAPIKey;
+  reader.ReadSection(GoogleSheetName, SectionName); 
   ReadZones();
 }
 	

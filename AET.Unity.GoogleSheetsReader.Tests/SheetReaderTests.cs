@@ -8,61 +8,65 @@ namespace AET.Unity.GoogleSheetsReader.Tests {
   [TestClass()]
   public class SheetReaderTests {
     private readonly SheetReader sheetReader = new SheetReader();
+    private string sampleJson = "{\"majorDimension\": \"ROWS\", \"range\": \"Sheet1!A1:D12\", \"values\": [[\"Section 1 Name\", \"Name\", \"Date\", \"Value\"], [\"\", \"Item 1\", \"12/1/2022\", \"105.3\"], [\"\", \"Item 2\", \"12/13/2022\", \"99.7\"], [\"My 2nd Section\", \"Description\", \"Qty\", \"Price\"], [\"\", \"Item Type A\", \"100\", \"25.95\"], [\"\", \"Item Type B\", \"50\", \"14.95\"]]}";
+    
+    //Json Samples from: https://docs.google.com/spreadsheets/d/1WCXD3m8lKbrhlAkJa6cHlWXUSzqFqCSpCL9sSZEk4Uo/edit
 
     [TestMethod]
     public void ReadCSVText_ValidData_SheetHasSection() {
-      var testText = "Section Name 1,Col 1,Col 2,Col 3";
-      var sheet = sheetReader.ReadCsvText(testText);
+      var testText = "{\"majorDimension\": \"ROWS\", \"range\": \"Sheet1!A1:D12\", \"values\": [[\"Section 1 Name\", \"Name\", \"Date\", \"Value\"]]}";
+      var sheet = sheetReader.ReadJsonText(testText);
       sheet.Sections.Count.Should().Be(1);
-      sheet.Sections[0].Name.Should().Be("Section Name 1");
+      sheet.Sections[0].Name.Should().Be("Section 1 Name");
       sheet.Sections[0].Rows.Count.Should().Be(0);
     }
-
     [TestMethod]
     public void ReadCSVText_ValidData_HasMultipleSections() {
-      var testText = "Vehicles,Card Number,,Garage,Active,Description\n,001,00001,Main 2,X,Veh 1\n,001,00002,Main 1,,Veh 2\n,001,00003,Collector's 4,X,Veh 3\n,001,00004,None,X,Veh 4\n,001,00005,None,,Veh 5\n,001,00006,None,,Veh 6\n,001,00007,Collector's 5,X,Veh 7\n,001,00008,None,X,Veh 8\n,001,00009,None,X,Veh 9\n,001,00010,Collector's 1,X,\"Veh 10, Fast\"\n,001,00011,None,,\"Veh 11, Slow\"\n,001,00012,Collector's 3,X,\"Veh 12, \"\"Red\"\"\"\n,001,00013,Collector's 6,X,Veh 13\n,001,00014,Main 1,X,Veh 14\n,001,00015,None,,Veh 15\n,001,00016,None,X,Veh 16\n,001,00017,None,,Veh 17\n,001,00018,None,,Veh 18\n,001,00019,None,X,Veh 19\n,001,00020,None,X,Veh 20\n,001,00021,None,X,Veh 21\n,001,00022,None,X,Veh 22\n,001,00023,Collector's 2,X,Veh 23\n,001,00024,None,,Veh 24\n,001,00025,None,,Veh 25\n,001,00026,None,X,Veh 26\n,001,00027,Main 1,X,Veh 27\n,001,00028,None,X,Veh 28\n,001,00029,None,,Veh 29\n,001,00030,Main 1,X,Veh 30\n,001,00031,Main 3,X,Veh 31\n,,,,,\nKeypad,PIN,Active,Description,,\n,1001,X,Code 1,,\n,1002,X,Code 2,,\n,1003,X,Code 3,,\n,1004,,,,\n,1005,,,,\n,1006,,,,\n,1007,,,,\n,1008,,,,\n,1009,,,,\n,1010,,,,\n,1011,,,,";
-      var sheet = sheetReader.ReadCsvText(testText);
+      var testText = sampleJson;
+      var sheet = sheetReader.ReadJsonText(testText);
       sheet.Sections.Count.Should().Be(2);
-      sheet.Sections[0].Name.Should().Be("Vehicles");
-      sheet.Sections[0].Rows.Count.Should().Be(31);
-      sheet.Sections[1].Name.Should().Be("Keypad");
-      sheet.Sections[1].Rows.Count.Should().Be(11);
+      sheet.Sections[0].Name.Should().Be("Section 1 Name");
+      sheet.Sections[0].Rows.Count.Should().Be(2);
+      sheet.Sections[1].Name.Should().Be("My 2nd Section");
+      sheet.Sections[1].Rows.Count.Should().Be(2);
 
     }
 
     [TestMethod]
     public void ReadCSVText_ValidData_CanReadColumnNames() {
-      var testText = "Section Name 1,Col 1,Col 2,Col 3";
-      var sheet = sheetReader.ReadCsvText(testText);
-      sheet.Sections[0].Columns[1].Should().Be("Col 2");
-    }
-
-    [TestMethod]
-    public void ReadCSVText_TextHasQuotes_DelimitsCorrectly() {
-      var testText = "Section Name 1,Col 1,\"Col 2,2\",\"\"\"Col\"\" 3\"";
-      var sheet = sheetReader.ReadCsvText(testText);
-      sheet.Sections[0].Columns[1].Should().Be("Col 2,2");
-      sheet.Sections[0].Columns[2].Should().Be("\"Col\" 3");
+      var testText = sampleJson;
+      var sheet = sheetReader.ReadJsonText(testText);
+      sheet.Sections[0].Columns[1].Should().Be("Date");
     }
 
     [TestMethod]
     public void ReadCSVText_ValidRowData_SectionHasRows() {
-      var testText = "Section Name 1,Col 1,Col 2,Col 3\r\n,Data 1,Data 2,Data 3";
-      var sheet = sheetReader.ReadCsvText(testText);
+      var testText = sampleJson;
+      var sheet = sheetReader.ReadJsonText(testText);
       var section = sheet.Sections[0];
-      section.Rows.Count.Should().Be(1);
-      section.Rows[0].Cells[1].Should().Be("Data 2");
+      section.Rows.Count.Should().Be(2);
+      section.Rows[0].Cells[1].Should().Be("12/1/2022");
+      section.Rows[1]["Value"].Should().Be("99.7");
     }
 
     [TestMethod]
     public void ReadCSVText_MultiSectionData_ParsedCorrectly() {
-      var testText = "Section Name 1,Col 1,Col 2,Col 3\r\n,Data 1,Data 2,Data 3\r\n,,,\r\nSection Name 2,Col A,Col B,Col C\r\n,Data A1,Data B1,Data C1\r\n,Data A2,Data B2,Data C2\r\n,,,\r\n,Data A3,Data B3,Data C3\r\n,Data A4,Data B4,Data C4\r\n,Data A5,Data B5,Data C5";
-      var sheet = sheetReader.ReadCsvText(testText);
+      var testText = sampleJson;
+      var sheet = sheetReader.ReadJsonText(testText);
       sheet.Sections.Count.Should().Be(2);
-      var section = sheet.Sections[1];
-      section.Rows.Count.Should().Be(5);
-      section.Rows[4].Cells[2].Should().Be("Data C5");
-      section.Rows[4].Cells["Col C"].Should().Be("Data C5");
+      var section = sheet.Sections["My 2nd Section"];
+      section.Rows.Count.Should().Be(2);
+      section.Rows[1]["Description"].Should().Be("Item Type B");
+      section.Rows[0].Cells["Price"].Should().Be("25.95");
+    }
+
+    [TestMethod]
+    public void ReadJsonText_SheetHasNoSections_ParsedCorrectly() {
+      var testText = "{\"majorDimension\": \"ROWS\", \"range\": \"'Sectionless Sheet'!A1:D7\", \"values\": [[\"SKU\", \"Type\", \"Qty\", \"Description\"], [\"BK1023\", \"Nut\", \"1053\", \"Description BK1023\"], [\"RM3034\", \"Nut\", \"8\", \"Description RM3034\"], [\"43RA3A\", \"Bolt\", \"10\", \"Description 43RA3A\"], [\"INT21\", \"Bolt\", \"30011\", \"Description INT21\"], [\"INT44\", \"Bolt\", \"221\", \"Description INT44\"], [\"QU34M7\", \"Screw\", \"314\", \"Description QU34M7\"]]}";
+      var section = sheetReader.ReadJsonTextWithoutSections(testText);
+      section.Rows.Count.Should().Be(6);
+      section.Rows[3]["SKU"].Should().Be("INT21");
+      section.Rows[5]["Description"].Should().Be("Description QU34M7");
     }
   }
 }
