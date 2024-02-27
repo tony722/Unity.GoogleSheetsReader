@@ -2,6 +2,7 @@
 using AET.Unity.SimplSharp.FileIO;
 using AET.Unity.SimplSharp.HttpClient;
 using System;
+using Crestron.SimplSharp.Net;
 
 namespace AET.Unity.GoogleSheetsReader {
   public class GoogleReader {
@@ -9,7 +10,7 @@ namespace AET.Unity.GoogleSheetsReader {
     public string CacheFilenameBase { get; set; }
     public string GoogleWorkbookId { get; set; }
     public string GoogleApiKey { get; set; }
-    private string CacheFilename { get { return string.Format("{0}_{1}.json", CacheFilenameBase, SheetName); } }
+    private string CacheFilename { get { return string.Format("{0}_{1}.json", CacheFilenameBase, SheetName.ToSafeFileName()); } }
     
     static GoogleReader() {
       FileIO = new CrestronFileIO();
@@ -20,7 +21,7 @@ namespace AET.Unity.GoogleSheetsReader {
     public static IHttpClient HttpClient;
 
     private string ReadHttpsFromGoogle() {      
-      var url = string.Format("https://sheets.googleapis.com/v4/spreadsheets/{0}/values/{1}?alt=json&key={2}", GoogleWorkbookId, SheetName, GoogleApiKey); 
+      var url = string.Format("https://sheets.googleapis.com/v4/spreadsheets/{0}/values/{1}?alt=json&key={2}", GoogleWorkbookId, HttpUtility.UrlEncode(SheetName), GoogleApiKey); 
 
       ConsoleMessage.Print("Unity.GoogleSheetsReader: Loading via https Google Workbook '{0}', {1}...", GoogleWorkbookId, SheetName); 
       var result = HttpClient.Get(url);            
