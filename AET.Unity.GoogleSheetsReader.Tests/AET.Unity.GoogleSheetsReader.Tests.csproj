@@ -126,9 +126,13 @@
       <Project>{9727A743-5F36-49E7-A85F-DBD55379ABF9}</Project>
       <Name>AET.Unity.SimplSharp VS2019</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader 2019.csproj">
+    <ProjectReference Include="..\..\AET.Unity.SimplSharp\AET.Unity.SimplSharp\AET.Unity.SimplSharp.2022.csproj">
+      <Project>{9727a743-5f36-49e7-a85f-dbd55379abf9}</Project>
+      <Name>AET.Unity.SimplSharp.2022</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AET.Unity.GoogleSheetsReader\AET.Unity.GoogleSheetsReader.2022.csproj">
       <Project>{336ed991-9ac1-496d-b23c-91ee14f95225}</Project>
-      <Name>AET.Unity.GoogleSheetsReader 2019</Name>
+      <Name>AET.Unity.GoogleSheetsReader.2022</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
