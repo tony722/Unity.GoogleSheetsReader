@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace AET.Unity.GoogleSheetsReader {
-  public class Cells {
+  public class Cells : IEnumerable<string> {
     private readonly List<string> cells;
     private readonly Section parentSection;
 
@@ -27,9 +28,13 @@ namespace AET.Unity.GoogleSheetsReader {
       }
     }
 
+    public IEnumerator<string> GetEnumerator() { return cells.GetEnumerator(); }
+
     public override string ToString() {
       return string.Join("\t", cells.ToArray());
     }
+
+    IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
     public string[] ToArray() {
       return cells.ToArray();

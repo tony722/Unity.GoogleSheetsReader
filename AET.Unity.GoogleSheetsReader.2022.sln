@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReader.Tests", "AET.Unity.GoogleSheetsReader.Tests\AET.Unity.GoogleSheetsReader.Tests.csproj", "{833AD046-6E27-4A16-B8F7-4FA93C285861}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Referenced Projects", "Referenced Projects", "{D9D41DF0-C1BC-48C7-B45E-E113A5E86F03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.SimplSharp.2022", "..\AET.Unity.SimplSharp\AET.Unity.SimplSharp\AET.Unity.SimplSharp.2022.csproj", "{9727A743-5F36-49E7-A85F-DBD55379ABF9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,8 +34,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E078F86-53E2-45C2-8E1C-884AF68B321D}
