@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.GoogleSheetsReader.Tests", "AET.Unity.GoogleSheetsReader.Tests\AET.Unity.GoogleSheetsReader.Tests.csproj", "{833AD046-6E27-4A16-B8F7-4FA93C285861}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AET.Unity.ConfigurationProviders.GoogleSheets.2022", "..\AET.Unity\AET.Unity.ConfigurationProviders\GoogleSheets\AET.Unity.ConfigurationProviders.GoogleSheets.2022.csproj", "{EBC1B048-39AA-453C-82A4-0E62DC1060EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{833AD046-6E27-4A16-B8F7-4FA93C285861}.Release|Any CPU.Build.0 = Release|Any CPU
 		{833AD046-6E27-4A16-B8F7-4FA93C285861}.Release|x86.ActiveCfg = Release|Any CPU
 		{833AD046-6E27-4A16-B8F7-4FA93C285861}.Release|x86.Build.0 = Release|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Debug|x86.Build.0 = Debug|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{EBC1B048-39AA-453C-82A4-0E62DC1060EF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
